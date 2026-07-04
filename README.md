@@ -66,7 +66,7 @@ Generated Answer
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/zain-cs/rag-chatbot.git
+git clone https://github.com/zain-cs/rag-chatbots.git
 cd rag-chatbot
 ```
 
