@@ -53,16 +53,9 @@ if uploaded_file:
 
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                # Get relevant chunk
-                question_words = set(question.lower().split())
-                paragraphs = [p.strip() for p in document.split('\n') if len(p.strip()) > 30]
-                best, best_score = "", 0
-                for para in paragraphs:
-                    score = len(question_words & set(para.lower().split()))
-                    if score > best_score:
-                        best_score = score
-                        best = para
-                chunk = best if best else document[:300]
+                # Get relevant chunk using semantic search
+                from src.semantic_search import get_semantic_chunk
+                chunk = get_semantic_chunk(question, document)
 
                 # Generate answer
                 prompt = f"Based on this information: {chunk}\nQuestion: {question}\nAnswer:"
