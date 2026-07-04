@@ -10,9 +10,10 @@ model = GPT2LMHeadModel.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
 print("✅ Model loaded!\n")
 
-# ── 2. Load Document ──────────────────────────────────────────────────────────
-with open("data/sample.txt", 'r', encoding='utf-8') as f:
-    document = f.read()
+# — 2. Load Document ————————————————————————————————————————
+from pdf_loader import load_document
+file_path = input("📂 Enter path to your document (PDF or TXT): ").strip()
+document = load_document(file_path)
 print(f"✅ Document loaded! {len(document.split())} words\n")
 
 # ── 3. Find relevant chunk ────────────────────────────────────────────────────
@@ -34,12 +35,15 @@ def ask(question, doc):
     inputs = tokenizer.encode(prompt, return_tensors="pt", max_length=400, truncation=True)
     with torch.no_grad():
         outputs = model.generate(
-            inputs,
-            max_new_tokens=60,
-            do_sample=False,
-            pad_token_id=tokenizer.eos_token_id,
-            eos_token_id=tokenizer.eos_token_id,
-        )
+        inputs,
+        max_new_tokens=60,
+        do_sample=True,
+        temperature=0.7,
+        top_p=0.9,
+        repetition_penalty=1.3,
+        pad_token_id=tokenizer.eos_token_id,
+        eos_token_id=tokenizer.eos_token_id,
+    )
     generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
     answer = generated.split("Answer:")[-1].strip()
     return answer.split('\n')[0].strip()
