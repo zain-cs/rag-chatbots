@@ -7,7 +7,8 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
 </div>
@@ -16,9 +17,29 @@
 
 ## 📌 Overview
 
-This project implements a **RAG (Retrieval-Augmented Generation)** chatbot that answers questions based on the content of a document. Instead of relying on general knowledge, the bot finds the most relevant section of your document and generates a focused answer.
+A **RAG (Retrieval-Augmented Generation)** chatbot that answers questions based on the content of any document. Supports both **PDF and TXT** files. Runs completely locally — no API key needed.
 
-> **Core idea: Feed the AI your document. Ask it anything about it.**
+> **Core idea: Upload your document. Ask it anything. Get instant answers.**
+
+---
+
+## ✨ Features
+
+- 📄 **PDF & TXT Support** — Upload any document format
+- 🌐 **Web UI** — Clean Streamlit interface
+- 💻 **CLI Mode** — Terminal-based chat
+- 🔒 **100% Local** — No API key or internet required
+- ⚡ **Fast** — GPT-2 runs on CPU
+
+---
+
+## 🖥️ Web Interface
+
+Run the web app and chat with your documents through a clean browser UI:
+
+```bash
+streamlit run app.py
+```
 
 ---
 
@@ -28,15 +49,13 @@ This project implements a **RAG (Retrieval-Augmented Generation)** chatbot that 
 📄 Document: AI & Machine Learning Guide
 
 You: What is machine learning?
-🤖 Bot: Machine learning is a subset of AI that allows systems
-        to learn from data without being explicitly programmed.
+🤖 Bot: Machine learning is a subset of AI that allows systems to learn from data without being explicitly programmed.
 
 You: What are the types of AI?
 🤖 Bot: Narrow AI, General AI, and Super AI.
 
 You: What is TensorFlow?
-🤖 Bot: TensorFlow is an open source framework by Google
-        for building machine learning models.
+🤖 Bot: TensorFlow is an open source framework by Google for building machine learning models.
 ```
 
 ---
@@ -44,19 +63,18 @@ You: What is TensorFlow?
 ## 🔍 How RAG Works
 
 ```
-Your Document (TXT)
-        │
-        ▼
+Your Document (PDF or TXT)
+          │
+          ▼
 Chunk the document into paragraphs
-        │
-        ▼
-Find most relevant chunk for the question
-(keyword matching)
-        │
-        ▼
+          │
+          ▼
+Find most relevant chunk for the question (keyword matching)
+          │
+          ▼
 Feed chunk + question to GPT-2
-        │
-        ▼
+          │
+          ▼
 Generated Answer
 ```
 
@@ -67,7 +85,7 @@ Generated Answer
 **1. Clone the repository**
 ```bash
 git clone https://github.com/zain-cs/rag-chatbots.git
-cd rag-chatbot
+cd rag-chatbots
 ```
 
 **2. Create and activate virtual environment**
@@ -83,7 +101,12 @@ source venv/bin/activate   # Mac/Linux
 pip install -r requirements.txt
 ```
 
-**4. Run the chatbot**
+**4a. Run the Web UI**
+```bash
+streamlit run app.py
+```
+
+**4b. Run the CLI chatbot**
 ```bash
 python src/chatbot.py
 ```
@@ -93,34 +116,17 @@ python src/chatbot.py
 ## 🗂️ Project Structure
 
 ```
-📦 rag-chatbot
- ┣ 📂 data
- ┃ ┗ 📄 sample.txt          ← Document the chatbot answers from
- ┣ 📂 src
- ┃ ┗ 🐍 chatbot.py          ← Main RAG chatbot
- ┣ 📄 .gitignore
- ┣ 📄 requirements.txt
- ┗ 📄 README.md
+📦 rag-chatbots
+┣ 📂 data
+┃ ┗ 📄 sample.txt         ← Sample document
+┣ 📂 src
+┃ ┣ 🐍 chatbot.py         ← CLI chatbot
+┃ ┗ 🐍 pdf_loader.py      ← PDF & TXT loader
+┣ 🐍 app.py               ← Streamlit web UI
+┣ 📄 .gitignore
+┣ 📄 requirements.txt
+┗ 📄 README.md
 ```
-
----
-
-## 📄 Using Your Own Document
-
-Simply replace `data/sample.txt` with any `.txt` file of your choice:
-
-```
-data/
-└── your_document.txt   ← paste your own content here
-```
-
-Then update this line in `chatbot.py`:
-
-```python
-with open("data/your_document.txt", 'r', encoding='utf-8') as f:
-```
-
-The chatbot will now answer questions about your document. ✅
 
 ---
 
@@ -132,6 +138,8 @@ The chatbot will now answer questions about your document. ✅
 | GPT-2 | Local text generation model |
 | HuggingFace Transformers | Model loading and inference |
 | PyTorch | Deep learning backend |
+| Streamlit | Web UI framework |
+| PyMuPDF | PDF text extraction |
 
 ---
 
@@ -140,11 +148,12 @@ The chatbot will now answer questions about your document. ✅
 - [x] Document loading and chunking
 - [x] Keyword-based relevant chunk retrieval
 - [x] GPT-2 local text generation
-- [x] Interactive chat loop
-- [ ] Upgrade to Gemini or GPT-4 API
-- [ ] Add PDF support
-- [ ] Build Streamlit web interface
+- [x] Interactive CLI chat loop
+- [x] PDF & TXT support
+- [x] Streamlit web interface
 - [ ] Semantic search with embeddings
+- [ ] Upgrade to Gemini or GPT-4 API
+- [ ] Deploy on Hugging Face Spaces
 
 ---
 
