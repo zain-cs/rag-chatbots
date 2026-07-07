@@ -60,12 +60,13 @@ if uploaded_file:
 
                 # Generate answer
                 prompt = (
-                    f"Answer the following question in a complete, detailed sentence, "
-                    f"using only the context below.\n\n"
+                    f"Using only the information in the context below, write one well-formed, "
+                    f"grammatically correct sentence that answers the question. "
+                    f"Do not copy the context word-for-word — rephrase it in your own words.\n\n"
                     f"Context: {chunk}\n\n"
                     f"Question: {question}\n\n"
                     f"Answer:"
-                )
+                )   
                 inputs = tokenizer(
                     prompt,
                     return_tensors="pt",
