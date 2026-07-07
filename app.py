@@ -1,6 +1,6 @@
 import streamlit as st
 import torch
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from src.pdf_loader import load_document
 
 # ── Page Config ───────────────────────────────────────────────────────────────
@@ -11,14 +11,13 @@ st.set_page_config(
 )
 
 st.title("🤖 RAG Chatbot")
-st.caption("Powered by GPT-2 — Ask questions about any document!")
+st.caption("Powered by Flan-T5 — Ask questions about any document!")
 
 # ── Load Model ────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_model():
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    model = GPT2LMHeadModel.from_pretrained("gpt2")
-    tokenizer.pad_token = tokenizer.eos_token
+    tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-base")
+    model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base")
     return tokenizer, model
 
 with st.spinner("⏳ Loading AI model..."):
@@ -58,21 +57,28 @@ if uploaded_file:
                 chunk = get_semantic_chunk(question, document)
 
                 # Generate answer
-                prompt = f"Based on this information: {chunk}\nQuestion: {question}\nAnswer:"
-                inputs = tokenizer.encode(prompt, return_tensors="pt", max_length=400, truncation=True)
+                prompt = (
+                    f"Answer the question based only on the context below. "
+                    f"Be concise and direct.\n\n"
+                    f"Context: {chunk}\n\n"
+                    f"Question: {question}\n\n"
+                    f"Answer:"
+                )
+                inputs = tokenizer(
+                    prompt,
+                    return_tensors="pt",
+                    max_length=512,
+                    truncation=True
+                )
                 with torch.no_grad():
                     outputs = model.generate(
-                        inputs,
-                        max_new_tokens=60,
-                        do_sample=True,
-                        temperature=0.7,
-                        top_p=0.9,
+                        **inputs,
+                        max_new_tokens=100,
+                        num_beams=4,
+                        early_stopping=True,
                         repetition_penalty=1.3,
-                        pad_token_id=tokenizer.eos_token_id,
-                        eos_token_id=tokenizer.eos_token_id,
                     )
-                generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                answer = generated.split("Answer:")[-1].strip().split('\n')[0].strip()
+                answer = tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
                 st.write(answer)
                 st.session_state.messages.append({"role": "assistant", "content": answer})
 else:
