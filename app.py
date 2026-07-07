@@ -58,8 +58,8 @@ if uploaded_file:
 
                 # Generate answer
                 prompt = (
-                    f"Answer the question based only on the context below. "
-                    f"Be concise and direct.\n\n"
+                    f"Answer the following question in a complete, detailed sentence, "
+                    f"using only the context below.\n\n"
                     f"Context: {chunk}\n\n"
                     f"Question: {question}\n\n"
                     f"Answer:"
@@ -74,6 +74,7 @@ if uploaded_file:
                     outputs = model.generate(
                         **inputs,
                         max_new_tokens=100,
+                        min_new_tokens=20,
                         num_beams=4,
                         early_stopping=True,
                         repetition_penalty=1.3,
