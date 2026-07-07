@@ -1,3 +1,17 @@
+---
+title: Rag Chatbot
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_port: 8501
+tags:
+- streamlit
+pinned: false
+short_description: RAG Chatbot that answers questions about any PDF or TXT
+license: mit
+---
+
 <div align="center">
 
 # 🤖 RAG Chatbot
