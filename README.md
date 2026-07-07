@@ -1,4 +1,17 @@
-<<<<<<< HEAD
+---
+title: Rag Chatbot
+emoji: 🚀
+colorFrom: red
+colorTo: red
+sdk: docker
+app_port: 8501
+tags:
+- streamlit
+pinned: false
+short_description: RAG Chatbot that answers questions about any PDF or TXT
+license: mit
+---
+
 <div align="center">
 
 # 🤖 RAG Chatbot
@@ -169,25 +182,3 @@ python src/chatbot.py
 ## 📄 License
 
 This project is licensed under the **MIT License** — free to use, modify, and build on it.
-=======
----
-title: Rag Chatbot
-emoji: 🚀
-colorFrom: red
-colorTo: red
-sdk: docker
-app_port: 8501
-tags:
-- streamlit
-pinned: false
-short_description: RAG Chatbot that answers questions about any PDF or TXT
-license: mit
----
-
-# Welcome to Streamlit!
-
-Edit `/src/streamlit_app.py` to customize this app to your heart's desire. :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
->>>>>>> 8b93c6ff8d7b1002ed1d53227d23920e4b4c423a
