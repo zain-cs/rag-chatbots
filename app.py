@@ -55,6 +55,8 @@ if uploaded_file:
                 # Get relevant chunk using semantic search
                 from src.semantic_search import get_semantic_chunk
                 chunk = get_semantic_chunk(question, document)
+                with st.expander("🔍 Debug: Retrieved chunk"):
+                    st.write(chunk)
 
                 # Generate answer
                 prompt = (
