@@ -35,7 +35,7 @@ license: mit
 
 ## 📌 Overview
 
-A **RAG (Retrieval-Augmented Generation)** chatbot that answers questions based on the content of any document. Supports both **PDF and TXT** files, uses **semantic search** (via sentence-transformers) to find the most relevant context, and generates answers using **GPT-2**. Deployed live on Hugging Face Spaces with Docker — no API key needed.
+A **RAG (Retrieval-Augmented Generation)** chatbot that answers questions based on the content of any document. Supports both **PDF and TXT** files, uses **semantic search** (via sentence-transformers) to find the most relevant context, and generates answers using **Flan-T5**, an instruction-tuned model that paraphrases rather than copying text verbatim. Deployed live on Hugging Face Spaces with Docker — no API key needed.
 
 > **Core idea: Upload your document. Ask it anything. Get instant answers.**
 
@@ -108,7 +108,7 @@ Embed chunks + question with sentence-transformers
 Retrieve the most semantically relevant chunk
           │
           ▼
-Feed chunk + question to GPT-2
+Feed chunk + question to Flan-T5
           │
           ▼
 Generated Answer
@@ -140,8 +140,8 @@ Generated Answer
 | Tool | Purpose |
 |---|---|
 | Python 3.10+ | Core language |
-| GPT-2 | Local text generation model |
-| Sentence-Transformers | Semantic embeddings for retrieval |
+| Flan-T5 (base) | Local instruction-tuned text generation model |
+| Sentence-Transformers (MiniLM) | Semantic embeddings for retrieval |
 | HuggingFace Transformers | Model loading and inference |
 | PyTorch | Deep learning backend |
 | Streamlit | Web UI framework |
@@ -153,13 +153,13 @@ Generated Answer
 ## 🗺️ Roadmap
 
 - [x] Document loading and chunking
-- [x] GPT-2 local text generation
 - [x] Interactive CLI chat loop
 - [x] PDF & TXT support
 - [x] Streamlit web interface
 - [x] Semantic search with embeddings
 - [x] Deploy on Hugging Face Spaces
-- [ ] Upgrade generation model (e.g. Gemini, GPT-4 API, or an instruction-tuned local model) for higher answer quality
+- [x] Upgrade generation model to Flan-T5 (instruction-tuned) for higher answer quality
+- [ ] Experiment with larger models (Flan-T5-large or an API-based LLM) for even better answer quality
 
 ---
 
