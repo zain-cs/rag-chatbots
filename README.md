@@ -30,6 +30,11 @@ license: mit
 **🔗 [Try it live](https://huggingface.co/spaces/zain-cs/rag-chatbot) — no install needed**
 
 </div>
+---
+
+<div align="center">
+  <img src="assets/demo.png" alt="RAG Chatbot Demo" width="700">
+</div>
 
 ---
 
