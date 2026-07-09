@@ -3,4 +3,3 @@ venv/
 __pycache__/
 *.pyc
 data/*.pdf
-assets/demo.png
