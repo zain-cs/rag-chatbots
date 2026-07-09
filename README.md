@@ -27,7 +27,8 @@ license: mit
 ![Status](https://img.shields.io/badge/Status-Live-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
-**🔗 [Try it live](https://huggingface.co/spaces/zain-cs/rag-chatbot) — no install needed**
+**🔗 [Try it live](https://huggingface.co/spaces/zain-cs/rag-chatbot)** — no install needed
+> Note: if the demo shows a temporary scheduling error, it's a known Hugging Face infrastructure issue, not a bug in the app. Refresh in a bit, or run locally using the steps below.
 
 </div>
 ---
